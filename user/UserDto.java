@@ -1,31 +1,39 @@
 package user;
 
 public class UserDto {
-	private String userId;
-	private String password;
-	private String name;
-	public String getUserId() {
-		return userId;
+	private String userid, name, password;
+
+	public String getUserid() {
+		return userid;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
-		return "UserDto [userId=" + userId + ", password=" + password + ", name=" + name + "]";
+		return "UserDto [userid=" + userid + ", name=" + name + ", password=" + password + "]";
 	}
+	
+	
+	
 	
 	
 

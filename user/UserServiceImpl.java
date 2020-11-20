@@ -2,67 +2,137 @@ package user;
 
 public class UserServiceImpl implements UserService{
 
+	private UserDto[] users;
+	private int count;
+	public UserServiceImpl() {
+		users = new UserDto[3];
+	}
 	@Override
 	public void join(UserDto user) {
-		// TODO Auto-generated method stub
+		users[count] = user;
+		count++;		
 		
 	}
 
 	@Override
-	public UserDto logIn(UserDto user) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserDto login(UserDto user) {
+		UserDto result = new UserDto();
+		for(int i = 0; i<count;i++) {
+			if(user.getUserid().equals(users[i].getUserid()) &&
+					user.getPassword().equals(users[i].getPassword())) {
+				result = users[i];
+				break;
+			}
+			
+		}
+		return result;
 	}
 
 	@Override
 	public void update(UserDto user) {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < count; i++) {
+			if(user.getUserid().equals(users[i].getUserid())) {
+			users[i].setPassword(user.getPassword());
+			break;
+			}
+			
+		}
+		
 		
 	}
 
 	@Override
 	public void delete(UserDto user) {
-		// TODO Auto-generated method stub
+		for(int i = 0; i<count;i++) {
+			if(user.getUserid().equals(users[i].getUserid())&&
+					user.getPassword().equals(users[i].getPassword())) {
+				users[i] = users[count-1];
+				users[count-1] = null;
+				count--;
+				break;
+			}
+		}
+		
 		
 	}
 
 	@Override
 	public boolean idCheck(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean flag = false;
+		for(int i=0; i<count;i++) {
+			if(id.equals(users[i].getUserid())) {
+				flag = true;
+				break;
+			}
+		}
+		
+		return flag;
 	}
 
 	@Override
 	public UserDto mypage(UserDto user) {
-		// TODO Auto-generated method stub
-		return null;
+		UserDto result = new UserDto();
+		for(int i= 0; i<count;i++) {
+			if(user.getUserid().equals(users[i].getUserid())
+					&& user.getPassword().equals(users[i].getPassword())) {
+				result = users[i];
+				break;
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
-	public UserDto[] list() {
-		// TODO Auto-generated method stub
-		return null;
+	public int countSameName(String name) {
+		int num = 0;
+		for(int i =0;i<count;i++) {
+			if(name.equals(users[i].getName())) {
+				num++;
+			}
+		}
+		return num;
+	}
+
+	@Override
+	public UserDto[] userList() {
+		
+		return users;
 	}
 
 	@Override
 	public UserDto idSearch(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		UserDto user = new UserDto();
+		for(int i = 0; i < count; i++) {
+			if(id.equals(users[i].getUserid())) {
+				user = users[i];
+			}
+		}
+		return user;
 	}
 
 	@Override
 	public UserDto[] nameSearch(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		int num = countSameName(name);
+		UserDto[] usersWithSameName = new UserDto[num];
+		int j = 0;
+		for(int i = 0; i< count;i++) {
+			if(name.equals(users[i].getUserid())) {
+				usersWithSameName[j] = users[i];
+				j++;
+				if(j==num) {
+					break;
+				}
+			}
+		}
+		
+		return usersWithSameName;
 	}
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return count;
 	}
 
-	
-	
 
 }

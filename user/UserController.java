@@ -3,15 +3,16 @@ package user;
 public class UserController {
 	private UserService userService;
 	
-	public UserController(){
+	public UserController() {
 		userService = new UserServiceImpl();
 	}
+	
 	public void postJoin(UserDto user) {
-		userService.join(user); 
-		
+		userService.join(user);
 	}
-	public UserDto postLogIn(UserDto user) {
-		return userService.logIn(user);
+	public UserDto postLogin(UserDto user) {
+		return userService.login(user);
+		
 	}
 	public void putUpdate(UserDto user) {
 		userService.update(user);
@@ -25,8 +26,12 @@ public class UserController {
 	public UserDto getMypage(UserDto user) {
 		return userService.mypage(user);
 	}
-	public UserDto[] getList() {
-		return userService.list();
+	public int getCountSameName(String name) {
+		return userService.countSameName(name);
+	}
+	public UserDto[] getUserList() {
+		return userService.userList();
+		
 	}
 	public UserDto getIdSearch(String id) {
 		return userService.idSearch(id);
@@ -37,6 +42,8 @@ public class UserController {
 	public int getCount() {
 		return userService.count();
 	}
+	
+	
 	
 	
 
